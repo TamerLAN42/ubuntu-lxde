@@ -1,0 +1,23 @@
+version: "3.9"
+
+services:
+  ubuntu-vnc:
+    build: .
+    container_name: ubuntu-lxde
+    restart: unless-stopped
+    dns:
+     - 8.8.8.8
+     - 1.1.1.1
+    ports:
+      - "5900:5900" # VNC
+      - "6080:6080" # NoVNC
+    environment:
+      VNC_PASSWORD: "YourSuperDuperSecretPasswordOrNotReally"
+    volumes:
+      - vmhome:/root
+    tty: true
+    shm_size: "6gb"
+
+volumes:
+  vmhome:
+    driver: local
